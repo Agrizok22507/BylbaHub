@@ -7,7 +7,7 @@ def run():
 
 @app.route('/')
 def home():
-    return render_template("website/index.html")
+    return render_template("index.html")
 
 if __name__ == '__main__':
   run()
