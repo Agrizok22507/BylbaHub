@@ -2,7 +2,7 @@ function notification(text) {
     const notif = document.createElement('div');
     notif.textContent = text;
     notif.id = 'notification'
-    notif.style.cssText = 'position: fixed; top: 20px; right: -300px; background: #333; color: white; border: 2px solid #666; padding: 15px; font-family: sans-serif; z-index: 9999; transition: right 0.3s ease, opacity 0.3s ease; opacity: 0; border-radius: 3px;';
+    notif.style.cssText = 'position: fixed; top: 20px; right: -300px; background: #333; color: white; border: 2px solid #666; padding: 15px; font-family: sans-serif; z-index: 999999; transition: right 0.3s ease, opacity 0.3s ease; opacity: 0; border-radius: 3px;';
     document.body.appendChild(notif);
     setTimeout(() => {
         notif.style.right = '20px';
@@ -16,14 +16,59 @@ function notification(text) {
 }
 
 async function loadScript(url) {
-    const response = await fetch(url);
-    const code = await response.text();
-    
-    const script = document.createElement('script');
-    script.textContent = code;
-    document.head.appendChild(script);
-    
-    return new Promise(resolve => {setTimeout(resolve, 10)});
+    try {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = url;
+            
+            script.onload = () => {
+                notification(`Successfully load script: ${url}`);
+                resolve();
+            };
+            
+            script.onerror = () => {
+                console.error(`Failed to load script: ${url}`);
+                fallbackLoadScript(url, resolve, reject);
+            };
+            
+            document.head.appendChild(script);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        notification(`Failed to load script: ${error.message}`);
+    }
+}
+
+async function anotherLoadScript(url, resolve, reject) {
+    try {
+        const response = await fetch(url);
+        const code = await response.text();
+        
+        if (code.trim().startsWith('<')) {
+            throw new Error('Server returned HTML instead of JavaScript');
+        }
+        
+        const blob = new Blob([code], { type: 'application/javascript' });
+        const blobUrl = URL.createObjectURL(blob);
+        
+        const script = document.createElement('script');
+        script.src = blobUrl;
+        
+        script.onload = () => {
+            URL.revokeObjectURL(blobUrl);
+            notification(`Successfully load script: ${url}`);
+            resolve();
+        };
+        
+        script.onerror = (e) => {
+            URL.revokeObjectURL(blobUrl);
+            reject(new Error(`Failed to load script: ${url}`));
+        };
+        
+        document.head.appendChild(script);
+    } catch (error) {
+        reject(error);
+    }
 }
 
 async function loadScriptsList() {
@@ -73,6 +118,7 @@ function setTheme(color) {
     }
 
     #BylbaHubButton {
+        z-index: 999999;
         position: fixed;
         left: 2%;
         top: 4%;
@@ -272,7 +318,7 @@ function initilizeBylbaHub() {
 
     button.innerText = 'BylbaHub';
     buttonHub.innerText = 'Hub';
-    buttonTheme.innerText = 'Themes';
+    buttonTheme.innerText = 'Theme';
     buttonPanic.innerText = 'Panic';
     label1.innerText = 'Bylba';
     label2.innerText = 'Hub';
@@ -308,6 +354,7 @@ function initilizeBylbaHub() {
     }
 
     #BylbaHubButton {
+        z-index: 999999;
         position: fixed;
         left: 2%;
         top: 4%;
