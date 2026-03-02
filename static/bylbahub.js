@@ -36,7 +36,7 @@ async function loadScriptsList() {
             return []
         }
     } catch (error) {
-        notification(`Error with loading extensions: ${error}`)
+        notification(`Failed to load extensions: ${error}`)
     }
 }
 
@@ -177,7 +177,11 @@ function appendExtension(name, version, link, importLink, author, description) {
     versionTitleExtenstion.innerText = `(v${version})`
     aboutExtension.innerText = `Description: ${description}\nAuthor: ${author}\nWebsite: ${link}`;
 
-    buttonInstall.onclick=()=>loadScript(importLink);
+    buttonInstall.onclick=async()=>{
+        try {
+            await loadScript(importLink);
+            notification(`Extension '${name}' installed`);
+        } catch (error) {notification(`Failed to install '${name}' extension: ${error}`)}};
 
     divTitle.appendChild(titleExtension);
     divTitle.appendChild(versionTitleExtenstion);
@@ -214,7 +218,7 @@ async function changeBylbaHubMenu(menu) {
                 appendExtension(extension.name, extension.version, extension.link, extension.scriptUrl, extension.author, extension.description);
             });
         } else {
-            notification("Error with loading extension")
+            notification("Failed to load extension")
         }
     } else if (menu === 'Theme') {
         appendTheme('rgb(204, 43, 43)');
