@@ -261,7 +261,7 @@ async function changeBylbaHubMenu(menu) {
         const jsonList = await loadScriptsList();
         if (jsonList) {
             jsonList.forEach(extension => {
-                appendExtension(extension.name, extension.version, extension.link, extension.scriptUrl, extension.author, extension.description);
+                appendExtension(extension.name, extension.version, extension.link, extension.importLink, extension.author, extension.description);
             });
         } else {
             notification("Failed to load extension")
