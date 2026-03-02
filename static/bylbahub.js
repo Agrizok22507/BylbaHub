@@ -30,10 +30,13 @@ async function loadScriptsList(url) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
-        return data;
+        if (data) {
+            return data;
+        } else {
+            return []
+        }
     } catch (error) {
-        console.error('Ошибка:', error);
+        notification("Error with loading extensions")
     }
 }
 
@@ -200,15 +203,19 @@ function appendTheme(color) {
     contentDiv.appendChild(buttonTheme);
 }
 
-function changeBylbaHubMenu(menu) {
+async function changeBylbaHubMenu(menu) {
     const contentDiv = document.getElementById('BylbaHubContentDiv');
 
     contentDiv.innerHTML = '';
     if (menu === 'Hub') {
-        const jsonList = loadScriptsList();
-        jsonList.forEach(extension => {
-            appendExtension(extension.name, extension.version, extension.website, extension.scriptUrl, extension.author, extension.description);
-        });
+        const jsonList = await loadScriptsList();
+        if (jsonList) {
+            jsonList.forEach(extension => {
+                appendExtension(extension.name, extension.version, extension.link, extension.scriptUrl, extension.author, extension.description);
+            });
+        } else {
+            notification("Error with loading extension")
+        }
     } else if (menu === 'Theme') {
         appendTheme('rgb(204, 43, 43)');
         appendTheme('rgb(244, 153, 67)');
