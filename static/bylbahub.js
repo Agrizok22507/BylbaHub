@@ -26,9 +26,9 @@ async function loadScript(url) {
     return new Promise(resolve => {setTimeout(resolve, 10)});
 }
 
-async function loadScriptsList(url) {
+async function loadScriptsList() {
     try {
-        const response = await fetch(url);
+        const response = await fetch('https://bylbahub.onrender.com/static/scripts.json');
         const data = await response.json();
         if (data) {
             return data;
