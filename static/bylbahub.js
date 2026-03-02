@@ -36,7 +36,7 @@ async function loadScriptsList(url) {
             return []
         }
     } catch (error) {
-        notification("Error with loading extensions")
+        notification(`Error with loading extensions: ${error}`)
     }
 }
 
