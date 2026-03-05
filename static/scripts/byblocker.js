@@ -2,7 +2,7 @@ let website = null;
 let attempt = 0;
 
 function cloneWebsite() {
-    const website = document.createElement('div');
+    const website = document.createDocumentFragment();
 
     const bodyClone = document.body.cloneNode(true);
     const headClone = document.head.cloneNode(true);
@@ -14,17 +14,43 @@ function cloneWebsite() {
 }
 
 function removeWebsite() {
-    document.body.querySelectorAll('*').forEach(element=>{
-        element.remove();
-    });
+    document.head.innerHTML = '';
+    document.body.innerHTML = '';
 }
 
 function returnWebsite() {
-    document.querySelectorAll('.byblocker').forEach(element=>{
-        element.remove();
-    })
+    removeWebsite();
 
-    document.body.appendChild(website);
+    const head = website.querySelector('head');
+    const body = website.querySelector('body');
+    
+    if (head) {
+        Array.from(head.children).forEach(element => {
+            const newElement = document.createElement(element.tagName);
+            
+            Array.from(element.attributes).forEach(attr => {
+                newElement.setAttribute(attr.name, attr.value);
+            });
+            
+            newElement.innerHTML = element.innerHTML;
+            
+            document.head.appendChild(newElement);
+        });
+    }
+
+    if (body) {
+        Array.from(body.children).forEach(element => {
+            const newElement = document.createElement(element.tagName);
+            
+            Array.from(element.attributes).forEach(attr => {
+                newElement.setAttribute(attr.name, attr.value);
+            });
+            
+            newElement.innerHTML = element.innerHTML;
+            
+            document.body.appendChild(newElement);
+        });
+    }
 }
 
 function tryToReturnWebsite(firstRandomValue, secondRandomValue) {
