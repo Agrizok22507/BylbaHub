@@ -14,5 +14,13 @@
         "importLink": "https://bylbahub.onrender.com/static/scripts/max.ru.js",
         "author": "baklysha",
         "description": "change icon and title"
+    },
+    {
+        "name": "Byblocker",
+        "version": "1.0.0",
+        "link": "None",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/byblocker.js",
+        "author": "baklysha",
+        "description": "kind web locker"
     }
 ]
