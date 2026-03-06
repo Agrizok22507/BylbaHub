@@ -181,6 +181,8 @@ function setTheme(color) {
         color: ${color};
     }
     `;
+
+    document.getElementById('bylbahubsvgiconpath').fill = color;
 }
 
 function toggleBylbaHub() {
@@ -285,6 +287,8 @@ function initilizeBylbaHub() {
     const button = document.createElement('button');
     const menu = document.createElement('div');
     const labelDiv = document.createElement('div');
+    const iconSvg = document.createElement('svg');
+    const pathIconSvg = document.createElement('path');
     const label1 = document.createElement('span')
     const label2 = document.createElement('span')
     const buttonsDiv = document.createElement('div');
@@ -297,6 +301,8 @@ function initilizeBylbaHub() {
     button.id = 'BylbaHubButton';
     menu.id = 'BylbaHubMenu';
     labelDiv.id = 'BylbaHubLabelDiv';
+    iconSvg.id = 'BylbaHubIcon';
+    pathIconSvg.id = 'BylbaHubIconPath';
     label1.id = 'BylbaHubLabel1';
     label2.id = 'BylbaHubLabel2';
     buttonsDiv.id = 'BylbaHubButtonsDiv';
@@ -308,6 +314,8 @@ function initilizeBylbaHub() {
 
     button.className = 'bylbahubbutton';
     labelDiv.className = 'bylbahublabeldiv';
+    iconSvg.className = 'bylbahubsvgicon'
+    pathIconSvg.className = 'bylbahubsvgiconpath';
     label1.className = 'bylbahublabel';
     label2.className = 'bylbahublabel';
     buttonsDiv.className = 'bylbahubbuttonsdiv';
@@ -322,6 +330,9 @@ function initilizeBylbaHub() {
     buttonPanic.innerText = 'Panic';
     label1.innerText = 'Bylba';
     label2.innerText = 'Hub';
+
+    iconSvg.xmlns = 'https://bylbahub.onrender.com/static/icon.svg'
+    pathIconSvg.fill = '#cc2b2b';
 
     style.textContent = `
     #BylbaHubContentDiv {
@@ -423,9 +434,12 @@ function initilizeBylbaHub() {
     buttonTheme.onclick=()=>changeBylbaHubMenu('Theme');
     buttonPanic.onclick=()=>panicMode();
 
+    iconSvg.appendChild(pathIconSvg);
+
     buttonsDiv.appendChild(buttonHub);
     buttonsDiv.appendChild(buttonTheme);
     buttonsDiv.appendChild(buttonPanic);
+    labelDiv.appendChild(iconSvg);
     labelDiv.appendChild(label1);
     labelDiv.appendChild(label2);
 
