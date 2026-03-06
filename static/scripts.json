@@ -22,5 +22,37 @@
         "importLink": "https://bylbahub.onrender.com/static/scripts/byblocker.js",
         "author": "baklysha",
         "description": "kind web locker"
+    },
+    {
+        "name": "AntiSpyware",
+        "version": "1.0.0",
+        "link": "None",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/antiSpyware.js",
+        "author": "baklysha",
+        "description": "remove spywares from website"
+    },
+    {
+        "name": "MStimetableTools",
+        "version": "1.0.0",
+        "link": "mstimetable.ru",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/mstimetable.ru.js",
+        "author": "baklysha",
+        "description": "custom themes for mstimetable.ru"
+    },
+    {
+        "name": "BylbaBlock",
+        "version": "1.0.0",
+        "link": "None",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/bylbaBlock.js",
+        "author": "baklysha",
+        "description": "bylba adblocker"
+    },
+    {
+        "name": "Rainbow",
+        "version": "1.0.0",
+        "link": "None",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/rainbow.js",
+        "author": "baklysha",
+        "description": "do not turn on this"
     }
 ]
