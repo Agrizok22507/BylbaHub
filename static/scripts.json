@@ -54,5 +54,13 @@
         "importLink": "https://bylbahub.onrender.com/static/scripts/rainbow.js",
         "author": "baklysha",
         "description": "do not turn on this"
+    },
+    {
+        "name": "LNAvito",
+        "version": "1.0.0",
+        "link": "datalesson25.avito.com",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/LNAvito.js",
+        "author": "baklysha",
+        "description": "Cheat menu for lesson numbers"
     }
 ]
