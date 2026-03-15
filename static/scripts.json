@@ -62,5 +62,13 @@
         "importLink": "https://bylbahub.onrender.com/static/scripts/LNAvito.js",
         "author": "baklysha",
         "description": "Cheat menu for lesson numbers"
+    },
+    {
+        "name": "BylbaConsole",
+        "version": "1.0.0",
+        "link": "None",
+        "importLink": "https://bylbahub.onrender.com/static/scripts/BylbaConsole.js",
+        "author": "baklysha",
+        "description": "Default console with many themes"
     }
 ]
